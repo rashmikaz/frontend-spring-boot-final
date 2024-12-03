@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function fetchFieldNames(targetElementId) {
     $.ajax({
-        url: "http://localhost:8081/spring-boot-final/api/v1/field",
+        url: "http://localhost:8081/spring-boot-final/api/v1/field/getallfieldnames",
         type: "GET",
         contentType: "application/json",
         success: function (response) {

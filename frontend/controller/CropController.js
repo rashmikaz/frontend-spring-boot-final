@@ -1,6 +1,7 @@
 $(document).ready(function () {
     loadCrops();
 });
+
 function loadCrops(){
     $.ajax({
         url: "http://localhost:8081/spring-boot-final/api/v1/crop",
