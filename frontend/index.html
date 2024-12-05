@@ -60,66 +60,52 @@
 
 <!--field-->
 <section id="field-section">
-
     <div class="container-fluid light-style flex-grow-1 container-p-y">
-        <h1 class="text-start section-header">
+        <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
             <i class="fab fa-delicious f-left"></i>Field
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
                 <!-- Form Section -->
-                <div class="form-card overflow-hidden">
+                <div class="form-card overflow-hidden animate__animated animate__fadeIn duration-4s">
 
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label class="form-label">Field Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter field name">
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter field name" id="field_name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Field Location (Coordinate)</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter GPS coordinates">
+                            <input type="number" class="form-control mb-4 shadow-none" placeholder="Enter GPS coordinates" id="field_location_x">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Field Location (Coordinate)</label>
+                            <input type="number" class="form-control mb-4 shadow-none" placeholder="Enter GPS coordinates" id="field_location_y">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Extent Size (sq. m)</label>
-                            <input type="number" class="form-control mb-4 shadow-none" placeholder="Enter extent size in sq. m">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Crops</label>
-<!--                            <select id="crop-type" class="form-control mb-4 shadow-none">-->
-<!--                                <option value="banana">xyz</option>-->
-<!--                                <option value="papaya">xyz</option>-->
-<!--                                <option value="guava">xyz</option>-->
-<!--                            </select>-->
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Staff</label>
-                            <select id="staff-type" class="form-control mb-4 shadow-none">
-                                <option value="perera">rashmika</option>
-                                <option value="silva">rashmika</option>
-                                <option value="mendis">rashmika</option>
-                            </select>
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter extent size in sq. m" id="field_size">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Field Image 1</label>
-                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*">
+                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*" id="field_image1">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Field Image 2</label>
-                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*">
+                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*" id="field_image2">
                         </div>
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-primary btn-sm">save</button>
-                            <button type="button" class="btn btn-secondary btn-sm">cancel</button>
+                            <button type="button" class="btn btn-warning" onclick="saveField()">Save</button>
+                            <button type="button" class="btn btn-primary" onclick="updateFields()">Update</button>
+                            <button type="button" class="btn btn-info" id="clearBtn" onclick="clearFields()">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
     <div class="col-md-8 col-sm-12">
         <!-- Table Section -->
-        <div class="container">
+        <div class="container animate__animated animate__fadeIn">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -139,7 +125,9 @@
         </div>
 
     </div>
+        </div>
 
+        </div>
 </section>
 
 <!--crop-->
@@ -217,246 +205,207 @@
 
 <!--staff-->
 <section id="staff-section">
-    <!--form-->
     <div class="container-fluid light-style flex-grow-1 container-p-y">
-        <h1 class="text-start section-header">
+        <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
             <i class="fa-solid fa-people-group"></i>Staff
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
                 <!-- Form Section -->
-                <div class="form-card overflow-hidden">
+                <div class="form-card overflow-hidden  animate__animated animate__fadeIn">
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">First Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter first name">
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter first name" id="first_name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter last name">
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter last name" id="last_name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Designation</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter designation">
+                            <select class="form-control mb-4 shadow-none" id="designation">
+                                <option value="" selected>Select a Desgination</option>
+                                <option value="ADMINISTRATIVE">Administrative</option>
+                                <option value="FIELD_WORKER">Field Worker</option>
+                                <option value="MANAGER">Manager</option>
+                                <option value="SCIENTIST">Scientist</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Gender</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                            <select class="form-control mb-4 shadow-none" id="gender">
+                                <option value="" selected>Select a Gender</option>
+                                <option value="MALE">Male</option>
+                                <option value="FEMALE">Female</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Joined Date</label>
-                            <input type="date" class="form-control mb-4 shadow-none">
+                            <input type="date" class="form-control mb-4 shadow-none" id="joined_date">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control mb-4 shadow-none">
+                            <input type="date" class="form-control mb-4 shadow-none" id="dob">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Address Line 01</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Building no or name">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Address Line 02</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Lane">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Address Line 03</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="City">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Address Line 04</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="State">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Postal Code</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Postal code">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Building no or name" id="address">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Contact No.</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Mobile number">
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Mobile number" id="contact">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control mb-4 shadow-none" placeholder="Email address">
+                            <input type="email" class="form-control mb-4 shadow-none" placeholder="Email address" id="email">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Role</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="admin">Admin</option>
-                                <option value="field_worker">Field Worker</option>
-                                <option value="manager">Manager</option>
+                            <select class="form-control mb-4 shadow-none" id="role">
+                                <option value="" selected>Select a Role</option>
+                                <option value="ADMINISTRATIVE">Administrative</option>
+                                <option value="FIELD_WORKER">Field Worker</option>
+                                <option value="MANAGER">Manager</option>
+                                <option value="SCIENTIST">Scientist</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Allocated Field(s)</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="field1">Field Name 1</option>
-                                <option value="field2">Field Name 2</option>
-                                <option value="field3">Field Name 3</option>
-                                <option value="na">N/A</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Vehicle</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="vehicle1">Vehicle 1</option>
-                                <option value="vehicle2">Vehicle 2</option>
-                                <option value="vehicle3">Vehicle 3</option>
-                                <option value="na">N/A</option>
+                            <select id="staff_field_details" class="form-control mb-4 shadow-none">
                             </select>
                         </div>
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-primary btn-sm">save</button>
-                            <button type="button" class="btn btn-secondary btn-sm">cancel</button>
+                            <button type="button" class="btn btn-warning" onclick="saveStaff()">Save</button>
+                            <button type="button" class="btn btn-primary" onclick="updateStaff()">Update</button>
+                            <button type="button" class="btn btn-info" onclick="clearStaffForm()">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Table Section -->
-    <div class="container">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Designation</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Joined Date</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Contact No.</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody id="staff-table">
 
-                </tbody>
-            </table>
+            <div class="col-md-8 col-sm-12">
+                <!-- Table Section -->
+                <div class="container animate__animated animate__fadeIn">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Joined Date</th>
+                            <th scope="col">DOB</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Contact No.</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="staff-table">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
     </div>
 </section>
 
 <!--monitoringlog-->
 <section id="monitoring-section">
-    <!--form-->
-
     <div class="container-fluid light-style flex-grow-1 container-p-y">
-        <h1 class="text-start section-header">
+        <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
             <i class="fas fa-clipboard-list f-left"></i>Monitoring Logs
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
                 <!-- Form Section -->
-                <div class="form-card overflow-hidden">
+                <div class="form-card overflow-hidden  animate__animated animate__fadeIn">
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Log Date</label>
-                            <input type="date" class="form-control mb-4 shadow-none">
+                            <input type="date" class="form-control mb-4 shadow-none" id="log_date">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Log Details / Observation</label>
                             <textarea class="form-control mb-4 shadow-none" placeholder="Enter observation details"
-                                      rows="3"></textarea>
+                                      rows="3" id="log_desc"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Observed Image</label>
-                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*">
+                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*" id="log_image">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Relevant Field(s)</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="field1">Field Name 1</option>
-                                <option value="field2">Field Name 2</option>
-                                <option value="field3">Field Name 3</option>
-                                <option value="na">N/A</option>
+                            <select class="form-control mb-4 shadow-none" id="log_field_details">
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Relevant Crop(s)</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="banana">Banana</option>
-                                <option value="papaya">Papaya</option>
-                                <option value="guava">Guava</option>
-                                <option value="na">N/A</option>
+                            <select class="form-control mb-4 shadow-none" id="log_crop_details">
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Relevant Staff Member(s)</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="perera">Perera</option>
-                                <option value="silva">Silva</option>
-                                <option value="mendis">Mendis</option>
-                                <option value="na">N/A</option>
+                            <select class="form-control mb-4 shadow-none" id="log_staff_details">
                             </select>
                         </div>
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-warning">Save</button>
-                            <button type="button" class="btn btn-info">Cancel</button>
+                            <button type="button" class="btn btn-warning" onclick="saveLog()">Save</button>
+                            <button type="button" class="btn btn-warning" onclick="updateLog()">Update</button>
+                            <button type="button" class="btn btn-info" onclick="clearLogForm()">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="col-md-8 col-sm-12">
-        <!-- Table Section -->
-        <div class="container">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Log Date</th>
-                        <th scope="col">Log Details</th>
-                        <th scope="col">Observed Image</th>
-                        <th scope="col">Relevant Field(s)</th>
-                        <th scope="col">Relevant Crop(s)</th>
-                        <th scope="col">Relevant Staff Member(s)</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody id="log-table">
+            <div class="col-md-8 col-sm-12">
+                <!-- Table Section -->
+                <div class="container animate__animated animate__fadeIn">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Log Date</th>
+                            <th scope="col">Log Details</th>
+                            <th scope="col">Observed Image</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="log-table">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     </div>
-    </div>
+</section>
 
 </section>
 <!--vehicle-->
 <section id="vehicle-section">
-    <!--form-->
-
     <div class="container-fluid light-style flex-grow-1 container-p-y">
-        <h1 class="text-start section-header">
+        <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
             <i class="fas fa-truck f-left"></i>Vehicle
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
                 <!-- Form Section -->
-                <div class="form-card overflow-hidden">
+                <div class="form-card overflow-hidden animate__animated animate__fadeIn">
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label class="form-label">License Plate Number</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter license plate number">
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter license plate number" id="license_plate">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Vehicle Category</label>
-                            <select class="form-control mb-4 shadow-none">
+                            <select class="form-control mb-4 shadow-none" id="category">
+                                <option value="" selected>Select Category</option>
                                 <option value="van">Van</option>
                                 <option value="truck">Truck</option>
                                 <option value="car">Car</option>
@@ -464,7 +413,8 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Fuel Type</label>
-                            <select class="form-control mb-4 shadow-none">
+                            <select class="form-control mb-4 shadow-none" id="fuel_type">
+                                <option value="" selected>Select Fuel Type</option>
                                 <option value="diesel">Diesel</option>
                                 <option value="petrol">Petrol</option>
                                 <option value="electric">Electric</option>
@@ -472,142 +422,134 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="available">Available</option>
-                                <option value="out_of_service">Out of Service</option>
+                            <select class="form-control mb-4 shadow-none" id="status">
+                                <option value="" selected>Select Status</option>
+                                <option value="AVAILABLE">Available</option>
+                                <option value="UNAVAILABLE">Unavailable</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Allocated Staff Member</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="perera">Perera</option>
-                                <option value="silva">Silva</option>
-                                <option value="mendis">Mendis</option>
+                            <select class="form-control mb-4 shadow-none" id="vehicle_staff_details">
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Remarks</label>
-                            <textarea class="form-control mb-4 shadow-none" placeholder="Enter remarks" rows="3"></textarea>
+                            <textarea class="form-control mb-4 shadow-none" placeholder="Enter remarks" rows="3" id="remarks"></textarea>
                         </div>
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-primary btn-sm">save</button>
-                            <button type="button" class="btn btn-secondary btn-sm">cancel</button>
+                            <button type="button" class="btn btn-warning" onclick="saveVehicle()">Save</button>
+                            <button type="button" class="btn btn-primary" onclick="updateVehicle()">Update</button>
+                            <button type="button" class="btn btn-info" onclick="clearVehicleForm()">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-8 col-sm-12">
-        <!-- Table Section -->
-        <div class="container">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">License Plate Number</th>
-                        <th scope="col">Vehicle Category</th>
-                        <th scope="col">Fuel Type</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Remarks</th>
-                        <th scope="col">Staff</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody id="vehicle-table">
 
-                    </tbody>
-                </table>
+            <div class="col-md-8 col-sm-12">
+                <!-- Table Section -->
+                <div class="container animate__animated animate__fadeIn">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">License Plate Number</th>
+                            <th scope="col">Vehicle Category</th>
+                            <th scope="col">Fuel Type</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Remarks</th>
+                            <th scope="col">Staff</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="vehicle-table">
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
     </div>
-    </div>
+</section>
+
 </section>
 
 <!--equipment-->
 <section id="equipment-section">
+        <div class="container-fluid light-style flex-grow-1 container-p-y">
+            <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
+                <i class="fas fa-trowel f-left"></i>Equipment
+            </h1>
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <!-- Form Section -->
+                    <div class="form-card overflow-hidden animate__animated animate__fadeIn">
+                        <div class="card-body">
+                            <div class="form-group ">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter equipment name" id="equipment_name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Type</label>
+                                <select class="form-control mb-4 shadow-none" id="equipment_type">
+                                    <option value="" selected>Select Equipment Type</option>
+                                    <option value="ELECTRICAL">Electrical</option>
+                                    <option value="MECHANICAL">Mechanical</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Status</label>
+                                <select class="form-control mb-4 shadow-none" id="equipment_status">
+                                    <option value="" selected>Status</option>
+                                    <option value="AVAILABLE">Available</option>
+                                    <option value="UNAVAILABLE">Unavailable</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Assigned Staff</label>
+                                <select class="form-control mb-4 shadow-none" id="equip_staff_details">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Assigned Field</label>
+                                <select class="form-control mb-4 shadow-none" id="equip_field_details">
+                                </select>
+                            </div>
+                            <div class="text-right mt-3">
+                                <button type="button" class="btn btn-warning" onclick="saveEquipment()">Save</button>
+                                <button type="button" class="btn btn-primary" onclick="updateEquipment()">Update</button>
+                                <button type="button" class="btn btn-info" onclick="clearEquipForm()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <!--form-->
+                <div class="col-md-8 col-sm-12">
+                    <!-- Table Section -->
+                    <div class="container animate__animated animate__fadeIn">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Assigned Staff</th>
+                                <th scope="col">Assigned Staff</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="equipment-table">
 
-    <div class="container-fluid light-style flex-grow-1 container-p-y">
-        <h1 class="text-start section-header">
-            <i class="fas fa-trowel f-left"></i>Equipment
-        </h1>
-        <div class="row">
-            <div class="col-md-4 col-sm-12">
-                <!-- Form Section -->
-                <div class="form-card overflow-hidden">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label class="form-label">Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter equipment name">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Type</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="electrical">Electrical</option>
-                                <option value="mechanical">Mechanical</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Status</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="available">Available</option>
-                                <option value="not_available">Not Available</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Assigned Staff</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="perera">Perera</option>
-                                <option value="silva">Silva</option>
-                                <option value="mendis">Mendis</option>
-                                <option value="na">N/A</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Assigned Field</label>
-                            <select class="form-control mb-4 shadow-none">
-                                <option value="field1">Field Name 1</option>
-                                <option value="field2">Field Name 2</option>
-                                <option value="field3">Field Name 3</option>
-                                <option value="na">N/A</option>
-                            </select>
-                        </div>
-                        <div class="text-right mt-3">
-                            <button type="button" class="btn btn-primary btn-sm">save</button>
-                            <button type="button" class="btn btn-secondary btn-sm">cancel</button>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-8 col-sm-12">
-        <!-- Table Section -->
-        <div class="container">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Assigned Staff</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody id="equipment-table">
-
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
-    </div>
-    </div>
-</section>
+    </section>
 <!-- jquery -->
 <script src="lib/jquery-3.7.1.min.js"></script>
 
@@ -619,6 +561,7 @@
 
 
 <script src="controller/CropController.js"></script>
+<script src="controller/EquipmentController.js"></script>
 <script src="controller/Controller.js"></script>
 
 
