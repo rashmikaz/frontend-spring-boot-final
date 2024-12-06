@@ -1,3 +1,12 @@
+$("#login-section").css({ display: "block" });
+$("#dashboard-section").css({ display: "none" });
+$("#field-section").css({ display: "none" });
+$("#crop-section").css({ display: "none" });
+$("#staff-section").css({ display: "none" });
+$("#monitoring-section").css({ display: "none" });
+$("#vehicle-section").css({ display: "none" });
+$("#equipment-section").css({ display: "none" });
+
 $("#login-section").css({display:'none'});
 $("#dashboard-section").css({display: 'block'});
 $("#field-section").css({display:'none'});
