@@ -11,11 +11,69 @@
     <!--    stylesheet-->
     <link rel="stylesheet" href="style/style.css">
 
+    <!-- font-awesome-css -->
+    <link rel="stylesheet" href="assets/fontawesome-free-6.7.1-web/css/all.min.css">
+
 
 </head>
 <body>
 
-<!--nav bar-->
+<!-- login-section -->
+<section id="login-section" class="section">
+    <div class="login-container">
+        <div class="form-section">
+            <div id="login-form">
+                <h2>Green Shadow Login</h2>
+                <form onsubmit="userLogin(event)">
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Email" id="login_email">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" id="login_password">
+                    </div>
+                    <button type="submit" id="btn-login">Login</button>
+                    <p class="link">
+                        Don't have an account? <a id="show-register">Register</a>
+                    </p>
+                </form>
+            </div>
+            <div id="register-form" class="hidden">
+                <h2>Green Shadow Register</h2>
+                <form>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Email" id="register_email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" id="register_password" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <select class="form-control mb-4 shadow-none" id="register_role">
+                            <option value="" selected>Select a Role</option>
+                            <option value="ADMINISTRATIVE">Administrative</option>
+                            <option value="MANAGER">Manager</option>
+                            <option value="SCIENTIST">Scientist</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="btn-register" onclick="signUp()">Register</button>
+                    <p class="link">
+                        Already have an account? <a id="show-login">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div class="image-section">
+            <img src="assets/images/letter-z-agriculture-logo-farming-logotype-symbol-template_754537-6455.jpg" alt="Background Image">
+        </div>
+    </div>
+</section>
+
+
+        <!--nav bar-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#" >GS</a>
@@ -56,13 +114,15 @@
 
 <!--dashboard-->
 
-<section id="dashboard-section"></section>
+<section id="dashboard-section">
+
+</section>
 
 <!--field-->
-<section id="field-section">
+<section id="field-section" class="section">
     <div class="container-fluid light-style flex-grow-1 container-p-y">
         <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
-            <i class="fab fa-delicious f-left"></i>Field
+            <i class=""></i>Field
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
@@ -102,41 +162,37 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-8 col-sm-12">
+                <!-- Table Section -->
+                <div class="container animate__animated animate__fadeIn">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Field Image</th>
+                                <th scope="col">Field Name</th>
+                                <th scope="col">Field Location</th>
+                                <th scope="col">Extent Size</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody id="fields-table">
 
-    <div class="col-md-8 col-sm-12">
-        <!-- Table Section -->
-        <div class="container animate__animated animate__fadeIn">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Field Image</th>
-                        <th scope="col">Field Name</th>
-                        <th scope="col">Field Location</th>
-                        <th scope="col">Extent Size</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody id="fields-table">
-
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-        </div>
-
-        </div>
 </section>
-
 <!--crop-->
 <section id="crop-section">
     <!--form-->
 
     <div class="container-fluid light-style flex-grow-1 container-p-y">
         <h1 class="text-start section-header">
-            <i class="fa-solid fa-seedling"></i>Crop
+            <i class=""></i>Crop
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
@@ -178,7 +234,7 @@
             </div>
     <div class="col-md-8 col-sm-12">
         <!-- Table Section -->
-        <div class="container">
+        <div class="container animate__animated animate__fadeIn">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -207,7 +263,7 @@
 <section id="staff-section">
     <div class="container-fluid light-style flex-grow-1 container-p-y">
         <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
-            <i class="fa-solid fa-people-group"></i>Staff
+            <i class=""></i>Staff
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
@@ -318,7 +374,7 @@
 <section id="monitoring-section">
     <div class="container-fluid light-style flex-grow-1 container-p-y">
         <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
-            <i class="fas fa-clipboard-list f-left"></i>Monitoring Logs
+            <i class=""></i>Monitoring Logs
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
@@ -391,7 +447,7 @@
 <section id="vehicle-section">
     <div class="container-fluid light-style flex-grow-1 container-p-y">
         <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
-            <i class="fas fa-truck f-left"></i>Vehicle
+            <i class=""></i>Vehicle
         </h1>
         <div class="row">
             <div class="col-md-4 col-sm-12">
@@ -479,7 +535,7 @@
 <section id="equipment-section">
         <div class="container-fluid light-style flex-grow-1 container-p-y">
             <h1 class="text-start section-header animate__animated animate__backInLeft duration-4s">
-                <i class="fas fa-trowel f-left"></i>Equipment
+                <i class=""></i>Equipment
             </h1>
             <div class="row">
                 <div class="col-md-4 col-sm-12">
@@ -562,7 +618,11 @@
 
 <script src="controller/CropController.js"></script>
 <script src="controller/EquipmentController.js"></script>
+<script src="controller/FieldController.js"></script>
 <script src="controller/Controller.js"></script>
+<script src="controller/LogController.js"></script>
+<script src="controller/StaffController.js"></script>
+<script src="controller/VehicleController.js"></script>
 
 
 </body>
