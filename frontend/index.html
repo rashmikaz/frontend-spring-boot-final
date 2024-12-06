@@ -10,9 +10,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <!--    stylesheet-->
     <link rel="stylesheet" href="style/style.css">
-
+    <!--    login css-->
+    <link rel="stylesheet" href="style/login.css">
     <!-- font-awesome-css -->
     <link rel="stylesheet" href="assets/fontawesome-free-6.7.1-web/css/all.min.css">
+
+     <!-- dashboard-css -->
+  <link rel="stylesheet" href="style/dashboard.css">
 
 
 </head>
@@ -23,7 +27,9 @@
     <div class="login-container">
         <div class="form-section">
             <div id="login-form">
-                <h2>Green Shadow Login</h2>
+                <h1>Welcome <br>Back</h1>
+                <h2>Hey! Good to see you again</h2>
+
                 <form onsubmit="userLogin(event)">
                     <div class="input-group">
                         <i class="fas fa-envelope"></i>
@@ -33,14 +39,17 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" placeholder="Password" id="login_password">
                     </div>
-                    <button type="submit" id="btn-login">Login</button>
+                    <button type="submit" id="btn-login" >Login</button>
                     <p class="link">
                         Don't have an account? <a id="show-register">Register</a>
                     </p>
                 </form>
             </div>
+
             <div id="register-form" class="hidden">
-                <h2>Green Shadow Register</h2>
+                <h1>Sign Up</h1>
+                <h2>Hello Please Register</h2>
+
                 <form>
                     <div class="input-group">
                         <i class="fas fa-envelope"></i>
@@ -66,15 +75,15 @@
                 </form>
             </div>
         </div>
+
         <div class="image-section">
-            <img src="assets/images/letter-z-agriculture-logo-farming-logotype-symbol-template_754537-6455.jpg" alt="Background Image">
+            <img src="assets/image/50406.jpg" alt="Background Image">
         </div>
     </div>
 </section>
 
-
-        <!--nav bar-->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<!--nav bar-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-c-green section" id="navbar" style="display: none;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#" >GS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,8 +123,54 @@
 
 <!--dashboard-->
 
-<section id="dashboard-section">
+<section id="dashboard-section" class="animate__animated animate__fadeIn" class="section">
 
+    <h1 class="text-start section-header"><i class="fab fa-delicious f-left"></i>Dashboard</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-xl-3 mb-3">
+          <div class="card bg-c-blue order-card">
+            <div class="card-block">
+              <h6 class="m-b-20">Number Of Fields</h6>
+              <h2 class="text-right"><i class="fab fa-delicious f-left"></i><span>486</span></h2>
+              <p class="m-b-0">Used Fields<span class="f-right">351</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mb-3">
+          <div class="card bg-c-green order-card">
+            <div class="card-block">
+              <h6 class="m-b-20">Number Of Staff</h6>
+              <h2 class="text-right"><i class="fa-solid fa-people-group f-left"></i><span>486</span></h2>
+              <p class="m-b-0">Used Staff<span class="f-right">351</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 mb-3">
+          <div class="card bg-c-yellow order-card">
+            <div class="card-block">
+              <h6 class="m-b-20">Number Of Vehicles</h6>
+              <h2 class="text-right"><i class="fa-solid fa-truck f-left"></i><span>486</span></h2>
+              <p class="m-b-0">Used Vehicles<span class="f-right">351</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3 mb-3">
+            <div class="card bg-c-pink order-card">
+              <div class="card-block">
+                <h6 class="m-b-20">Number Of Equipments</h6>
+                <h2 class="text-right"><i class="fa-solid fa-trowel f-left"></i><span>486</span></h2>
+                <p class="m-b-0">Used Equipments<span class="f-right">351</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="img-div">
+          <img src="assets/images/green-shadow-high-resolution-logo.png" alt="">
+        </div>
+      </div>
 </section>
 
 <!--field-->
@@ -605,16 +660,17 @@
             </div>
         </div>
         </div>
-    </section>
+</section>
 <!-- jquery -->
 <script src="lib/jquery-3.7.1.min.js"></script>
 
 <!-- bootstrap js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- login js -->
+<script src="js/login.js"></script>
 <!-- script js -->
 <script src="js/script.js"></script>
-
 
 <script src="controller/CropController.js"></script>
 <script src="controller/EquipmentController.js"></script>
@@ -623,7 +679,6 @@
 <script src="controller/LogController.js"></script>
 <script src="controller/StaffController.js"></script>
 <script src="controller/VehicleController.js"></script>
-
 
 </body>
 </html>
