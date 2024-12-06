@@ -2,11 +2,16 @@ $(document).ready(function () {
     loadCrops();
 });
 
-function loadCrops(){
+var recordIndex;
+
+function loadCrops() {
     $.ajax({
         url: "http://localhost:8081/spring-boot-final/api/v1/crop",
         type: "GET",
         contentType: "application/json",
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
         success: function (crops) {
             console.log("Crops loaded:", crops);
             $("#crop-table").empty();
@@ -42,7 +47,7 @@ function loadCrops(){
                 const season = row.find(".crop-season-value").text();
                 const field_name = row.find(".crop-field-value").text();
 
-                $("#crop_name").val(crop_name);
+                $("#crop_common_name").val(crop_name);
                 $("#crop_scientific_name").val(scientific_name);
                 $("#crop_category").val(category);
                 $("#crop_season").val(season);
@@ -50,46 +55,149 @@ function loadCrops(){
             });
         },
         error: function (xhr, status, error) {
-            console.error("Failed to load crops:", error);
-            alert("An error occurred while loading the crop data.");
+            console.error("Failed to load vehicle:", error);
+            // alert("An error occurred while loading the crop data.");
         },
     });
-
 }
 
+$("#crop-table").on("click", ".delete-button", function () {
+    const row = $(this).closest("tr");
 
-function saveCrop(){
+    const commonName = row.find(".crop-name-value").text();
+
+    $.ajax({
+        url: `http://localhost:8081/spring-boot-final/api/v1/crop/getcropcode/${commonName}`,
+        method: "GET",
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        success: function (cropCode) {
+            console.log("Fetched crop Code:", cropCode);
+
+            $.ajax({
+                url: `http://localhost:8081/spring-boot-final/api/v1/crop/${cropCode}`,
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+                contentType: "application/json",
+                success: function (results) {
+                    console.log(results);
+                    Swal.fire({
+                        title: "Crop Delete",
+                        text: "Crop Successfully Deleted",
+                        icon: "success",
+                    });
+                    loadCrops();
+                },
+                error: function (error) {
+                    console.log("Status:", status);
+                    console.log("Error:", error);
+                    Swal.fire({
+                        title: "Crop Delete",
+                        text: "Crop Delete Unsuccessfull",
+                        icon: "error",
+                    });
+                    loadCrops();
+                },
+            });
+        },
+        error: function (error) {
+            // alert("Error fetching crop id: " + error.responseText);
+            console.error(error);
+        },
+    });
+});
+
+function saveCrop() {
     const formData = new FormData();
 
-    formData.append("common_name",$("#crop_common_name").val());
+    formData.append("common_name", $("#crop_common_name").val());
     formData.append("scientific_name", $("#crop_scientific_name").val());
     formData.append("crop_image", $("#crop_image")[0].files[0]);
     formData.append("category", $("#crop_category").val());
     formData.append("season", $("#crop_season").val());
-    formData.append("field", $("#field_details").val());
+    formData.append("field_name", $("#field_details").val());
 
     $.ajax({
         url: " http://localhost:8081/spring-boot-final/api/v1/crop",
         method: "POST",
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
         contentType: false,
         processData: false,
         data: formData,
         success: function (result) {
             clearFields();
             console.log(result);
-            alert("Crop Save Successfull");
+            Swal.fire({
+                title: "Crop Save",
+                text: "Crop Successfully Saved",
+                icon: "success",
+            });
             loadCrops();
         },
         error: function (result) {
             clearFields();
             console.log(result);
-            alert("Crop Save Unsuccessfull");
+            Swal.fire({
+                title: "Crop Save",
+                text: "Crop Save Unsuccessfull",
+                icon: "error",
+            });
             loadCrops();
         },
     });
 }
 
-function clearFields(){
+function updateCrop() {
+    const formData = new FormData();
+
+    formData.append("common_name", $("#crop_common_name").val());
+    formData.append("scientific_name", $("#crop_scientific_name").val());
+    formData.append("crop_image", $("#crop_image")[0].files[0]);
+    formData.append("category", $("#crop_category").val());
+    formData.append("season", $("#crop_season").val());
+    formData.append("field_name", $("#field_details").val());
+
+    const commonName = $("#crop_common_name").val();
+    const url = `http://localhost:8081/spring-boot-final/api/v1/crop/${commonName}`;
+
+    $.ajax({
+        url: url,
+        method: "PATCH",
+        headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (result) {
+            clearFields();
+            console.log(result);
+            Swal.fire({
+                title: "Crop Update",
+                text: "Crop Successfully Updated",
+                icon: "success",
+            });
+            loadCrops();
+        },
+        error: function (result) {
+            clearFields();
+            console.log(result);
+            Swal.fire({
+                title: "Crop Update",
+                text: "Crop Update Unsuccessfull",
+                icon: "error",
+            });
+            loadCrops();
+        },
+    });
+}
+
+function clearFields() {
     $("#crop_common_name").val("");
     $("#crop_scientific_name").val("");
     $("#crop_image").val("");
